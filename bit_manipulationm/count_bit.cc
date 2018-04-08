@@ -10,6 +10,7 @@ int hamming_weight_naive(uint32_t val) {
     return out;
 }
 
+// invert lowest bit '1'
 int hamming_weight(uint32_t val) {
     int count = 0;
     while (val != 0) {
@@ -19,6 +20,18 @@ int hamming_weight(uint32_t val) {
     return count;
 }
 
+int hamming_weight_2(uint32_t val) {
+    int ret = 0;
+    while (val) {
+        val = val & (val-1);
+        ++ret;
+    }
+    return ret;
+}
+
 int main() {
-    std::cout << hamming_weight(11) << std::endl; //2
+    int N = 33;
+    for (int i = 0; i < N; ++i) {
+        std::cout << i << ": " << hamming_weight(i) << " " << hamming_weight_2(i) << std::endl; //2
+    }
 }
