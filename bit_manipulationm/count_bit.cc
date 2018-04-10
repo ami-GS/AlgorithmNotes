@@ -19,7 +19,7 @@ int hamming_weight(uint32_t val) {
     }
     return count;
 }
-
+// O(logN)
 int hamming_weight_2(uint32_t val) {
     int ret = 0;
     while (val) {
@@ -32,6 +32,6 @@ int hamming_weight_2(uint32_t val) {
 int main() {
     int N = 33;
     for (int i = 0; i < N; ++i) {
-        std::cout << i << ": " << hamming_weight(i) << " " << hamming_weight_2(i) << std::endl; //2
+        std::cout << i << ": " << hamming_weight(i) << " " << hamming_weight_2(i) << " " << __builtin_popcount(i) << std::endl; //2
     }
 }
