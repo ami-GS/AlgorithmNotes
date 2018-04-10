@@ -8,23 +8,16 @@ struct ListNode {
 
 //https://leetcode.com/problems/merge-two-sorted-lists/description/
 ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
-    ListNode* p;
-    ListNode* out;
-    if (l1->val < l2->val) {
-        out = l1;
-        l1 = l1->next;
-    } else {
-        out = l2;
-        l2 = l2->next;
-    }
-    p = out;
-    while (l1 || l2) {
+    ListNode dummy(0);
+    ListNode* out = &dummy;
+    dummy.next = nullptr;
+    while(1) {
         if(!l1) {
             out->next = l2;
-            return p;
+            break;
         } else if (!l2) {
             out->next = l1;
-            return p;
+            break;
         }
         if (l1->val < l2->val) {
             out->next = l1;
@@ -35,7 +28,7 @@ ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
         }
         out = out->next;
     }
-    return out;
+    return dummy.next;
 }
 
 ListNode* mergeTwoLists_r(ListNode* l1, ListNode* l2) {
@@ -70,8 +63,8 @@ int main() {
         np = np->next;
     }
 
-    //auto out = mergeTwoLists(n, n2);
-    auto out = mergeTwoLists_r(n, n2);
+    auto out = mergeTwoLists(n, n2);
+    //auto out = mergeTwoLists_r(n, n2);
 
     for (int i = 0; i < 2*N; ++i) {
         cout << out->val << "->";
