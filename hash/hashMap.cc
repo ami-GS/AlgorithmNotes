@@ -9,12 +9,26 @@ template <typename T, typename U>
 class HashMap {
     int tableSize;
     vector<pair<T, U>> table;
-    int calcHash(T str) {
-        int len = str.size();
+
+    int hashing(string key) {
+        int hashBase;
+        int len = key.size();
         if (len >= 2) {
-            len *= str[0] * str[len-1];
+            hashBase = len * key[0] * key[len-1];
+        } else if (len == 1){
+            hashBase = len * key[0];
+        } else {
+            //error?
         }
-        return len % tableSize;
+        return hashBase;
+    }
+    int hashing(int key) {
+        return key;
+    }
+
+    int calcHash(T key) {
+        int hashBase = 1;
+        return hashing(key);
     }
 public:
     HashMap(int tableSize) : tableSize(tableSize), table(vector<pair<T, U>>(tableSize, {})) {}
@@ -39,16 +53,26 @@ public:
 };
 
 int main() {
-    HashMap<string, int> myMap(256);
-    myMap.add({"one", 1});
-    myMap.add({"3ke", 2});
-    myMap.add({"098765", 123});
+    HashMap<string, int> myStrMap(256);
+    HashMap<int, int> myIntMap(256);
+    myStrMap.add({"one", 1});
+    myStrMap.add({"3ke", 2});
+    myStrMap.add({"098765", 123});
+    cerr << myStrMap.get("one") << endl;
+    myStrMap.add({"one", 2});
+    cerr << myStrMap.get("one") << endl;
+    cerr << myStrMap.get("3ke") << endl;
+    cerr << myStrMap.get("098765") << endl;
+
+    myIntMap.add({1, 1});
+    myIntMap.add({2, 2});
+    myIntMap.add({3, 123});
+    cerr << myIntMap.get(1) << endl;
+    myIntMap.add({1, 2});
+    cerr << myIntMap.get(1) << endl;
+    cerr << myIntMap.get(2) << endl;
+    cerr << myIntMap.get(3) << endl;
 
 
-    cerr << myMap.get("one") << endl;
-    myMap.add({"one", 2});
-    cerr << myMap.get("one") << endl;
-    cerr << myMap.get("3ke") << endl;
-    cerr << myMap.get("098765") << endl;
     return 1;
 }
