@@ -2,6 +2,7 @@ package main
 
 import "fmt"
 
+// https://leetcode.com/problems/longest-palindromic-substring
 func longestPalindrome(s string) string {
 	evenIDs := make([]int, 0, 1000)
 	oddIDs := make([]int, 0, 1000)
