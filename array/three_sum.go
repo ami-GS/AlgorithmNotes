@@ -5,6 +5,41 @@ import (
 	"sort"
 )
 
+// https://leetcode.com/problems/3sum/
+func threeSum(arr []int) [][]int {
+	sort.Slice(arr, func(i, j int) bool {
+		return arr[i] < arr[j]
+	})
+
+	outMap := make(map[[3]int]struct{})
+	for left := 0; left < len(arr); left++ {
+		mid := left + 1
+		for right := len(arr) - 1; mid < right; right-- {
+			lrSum := arr[left] + arr[right]
+			for mid < right {
+				sum := lrSum + arr[mid]
+				fmt.Println(len(arr), arr, left, mid, right, sum)
+				if sum > 0 {
+					break
+				} else if sum < 0 {
+					mid++
+				} else {
+					//out = append(out, []int{arr[left], arr[mid], arr[right]})
+					outMap[[3]int{arr[left], arr[mid], arr[right]}] = struct{}{}
+					mid++
+				}
+			}
+		}
+	}
+	out := make([][]int, len(outMap))
+	i := 0
+	for k, _ := range outMap {
+		out[i] = []int{k[0], k[1], k[2]}
+		i++
+	}
+	return out
+}
+
 type myArr []int
 
 func (p *myArr) Len() int {
@@ -46,5 +81,10 @@ func main() {
 	arr := []int{2, 3, 4, -1, 5, -2, 6, -1, 0, 8}
 	out := calc(arr, 10)
 	fmt.Println(out)
+	arr2 := []int{-1, 0, 1, 2, -1, -4}
+	out2 := threeSum(arr2)
+	fmt.Println(out2)
+	out3 := threeSum(arr)
+	fmt.Println(out3)
 
 }
