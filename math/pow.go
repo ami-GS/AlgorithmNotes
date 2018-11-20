@@ -2,6 +2,7 @@ package main
 
 import "fmt"
 
+//https://leetcode.com/problems/powx-n/
 func pow(x float64, n int) float64 {
 	if n == 1 {
 		return x
