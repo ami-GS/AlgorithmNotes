@@ -77,14 +77,45 @@ func calc(arr myArr, target int) [][3]int {
 	return out
 }
 
+func calc2(arr []int, target int) [][3]int {
+	// use map if duplication is not allowed
+	out := make([][3]int, 0)
+	sort.Slice(arr, func(i, j int) bool {
+		return arr[i] < arr[j]
+	})
+
+	for i := 0; i < len(arr)-2; i++ {
+		j := i + 1
+		k := len(arr) - 1
+		for {
+			tmp := arr[i] + arr[j] + arr[k]
+			if tmp < target {
+				j++
+			} else if tmp > target {
+				k--
+			} else {
+				out = append(out, [3]int{arr[i], arr[j], arr[k]})
+				j++
+			}
+			if j == k {
+				break
+			}
+		}
+	}
+	return out
+}
+
 func main() {
 	arr := []int{2, 3, 4, -1, 5, -2, 6, -1, 0, 8}
 	out := calc(arr, 10)
 	fmt.Println(out)
+	out = calc2(arr, 10)
+	fmt.Println(out, "-----------------")
 	arr2 := []int{-1, 0, 1, 2, -1, -4}
 	out2 := threeSum(arr2)
 	fmt.Println(out2)
 	out3 := threeSum(arr)
 	fmt.Println(out3)
-
+	out = calc2(arr, 0)
+	fmt.Println(out, "-----------------")
 }
