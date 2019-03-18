@@ -8,6 +8,7 @@ int calc(std::vector<int> nums) {
 
     int dp = 0; // will reset if dp+nums[i] is smaller than nums[i]
     int ans = 0;
+    int curMax = 0;
     for (int i = 0; i < N; i++) {
         curMax = std::max(nums[i], curMax+nums[i]);
         ans = std::max(ans, curMax);
