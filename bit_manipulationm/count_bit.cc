@@ -21,6 +21,7 @@ int hamming_weight(uint32_t val) {
     return count;
 }
 // O(logN)
+// because unsigned integer N has log(N) length bits
 int hamming_weight_2(uint32_t val) {
     int ret = 0;
     while (val) {
