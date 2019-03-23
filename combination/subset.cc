@@ -1,5 +1,6 @@
 #include <vector>
 #include <iostream>
+#include <math.h>
 using namespace std;
 
 // https://leetcode.com/problems/subsets/description/
@@ -31,6 +32,26 @@ vector<vector<int>> subsets_bit(vector<int>& nums) {
     return out;
 }
 
+template <typename T>
+static inline
+T pow2(T factor) {
+    return 1 << factor;
+}
+
+vector<vector<int>> subsets_bit2(const vector<int>& nums) {
+    vector<vector<int>> out;
+    for (unsigned mask = 0; mask < pow2(nums.size()); ++mask) {
+        vector<int> tmp;
+        for (unsigned location_bit = mask; location_bit != 0; ) {
+            unsigned logged = static_cast<unsigned>(log2(location_bit));
+            tmp.emplace_back(nums[logged]);
+            location_bit ^= pow2(logged);
+        }
+        out.emplace_back(std::move(tmp));
+    }
+    return out;
+}
+
 
 int subsets_rec(vector<int>& nums, vector<int> buff, vector<vector<int>> *out, int idx) {
     if (nums.size() == idx) {
@@ -58,7 +79,7 @@ int main() {
     }
     cout << " ]" << endl;
 
-    out = subsets_bit(nums);
+    out = subsets_bit2(nums);
     cout << "[ ";
     for(auto v: out) {
         cout << "[";
