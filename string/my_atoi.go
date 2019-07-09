@@ -5,6 +5,44 @@ import (
 	"math"
 )
 
+func myAtoi2(str string) int {
+	numStarting := false
+	out := int(0)
+	sign := false
+	for _, c := range str {
+		switch {
+		case c == ' ':
+			if numStarting {
+				break
+			}
+		case c == '-':
+			sign = true
+		case c == '+':
+			continue
+		case '0' <= c && c <= '9':
+			numStarting = true
+			out = out*10 + int(c-'0')
+		default:
+			if !numStarting {
+				return 0
+			} else {
+				break
+			}
+		}
+	}
+	if out > 2147483648 && sign {
+		return -2147483648
+	}
+	if out > 2147483647 {
+		return 2147483647
+	}
+	if sign {
+		return -out
+	}
+	return out
+}
+
+// https://leetcode.com/problems/string-to-integer-atoi/
 func myAtoi(str string) int {
 	sign := 1
 	oneSign := false

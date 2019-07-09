@@ -32,6 +32,6 @@ func combinationSum(nums []int, target int) int {
 
 func main() {
 	nums := []int{1, 2, 3}
-	fmt.Println(combinationSum_r(nums, 6))
-	fmt.Println(combinationSum(nums, 6))
+	fmt.Println(combinationSum_r(nums, 4))
+	fmt.Println(combinationSum(nums, 4))
 }

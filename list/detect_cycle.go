@@ -32,6 +32,7 @@ func main() {
 		np = np.nxt
 	}
 	np = root
-	//np.nxt.nxt.nxt.nxt.nxt.nxt = np.nxt.nxt
+	fmt.Println(hasCycle(root))
+	np.nxt.nxt.nxt.nxt.nxt.nxt = np.nxt.nxt
 	fmt.Println(hasCycle(root))
 }

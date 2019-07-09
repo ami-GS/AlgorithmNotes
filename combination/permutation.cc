@@ -44,7 +44,7 @@ vector<vector<int>> permute_loop(vector<int> nums, int len) {
 
 int main() {
     vector<int> nums{1,2,3,4,5};
-    auto out = permute_dup_loop(nums, 3);
+    auto out = permute_loop(nums, 3);
     cout << "[ ";
     for(auto v: out) {
         cout << "[";

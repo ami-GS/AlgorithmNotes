@@ -20,17 +20,17 @@ vector<vector<int>> subsetsWithDup(vector<int>& nums) {
 
 
 // ????? difficult
-int subsetsWithDup_rec(vector<int>& nums, vector<int> buff, vector<vector<int>> *out, int idx) {
-    if (nums.size() == idx) {
-        out->push_back(buff);
-        return 1;
-    }
+// int subsetsWithDup_rec(vector<int>& nums, vector<int> buff, vector<vector<int>> *out, int idx) {
+//     if (nums.size() == idx) {
+//         out->push_back(buff);
+//         return 1;
+//     }
 
-    subsets_rec(nums, buff, out, idx+1);
-    buff.push_back(nums[idx]);
-    subsets_rec(nums, buff, out, idx+1);
-    return 1;
-}
+//     subsets_rec(nums, buff, out, idx+1);
+//     buff.push_back(nums[idx]);
+//     subsets_rec(nums, buff, out, idx+1);
+//     return 1;
+// }
 
 int main() {
     vector<int> nums{1,2,2};
